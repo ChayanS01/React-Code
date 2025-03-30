@@ -8,8 +8,10 @@ import Home from './Components/Home/Home.jsx'
 import About from './Components/About/About.jsx'
 import Contact from './Components/Contact/Contact.jsx'
 import { User } from './Components/User/User.jsx'
-import { Github } from './Components/Github/Github.jsx'
+import { Github, githubInfoLoader } from './Components/Github/Github.jsx'
 
+
+// Way of defining routes using react-router-dom 
 // const router = createBrowserRouter([
 //   {
 //     path: "/",
@@ -31,6 +33,9 @@ import { Github } from './Components/Github/Github.jsx'
 //   }
 // ])
 
+
+// Another way of defining routes using react-router-dom
+// this is much easier to read and understand
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element = {<Layout/>}>
@@ -38,13 +43,14 @@ const router = createBrowserRouter(
       <Route path='About' element={<About/>}/>
       <Route path='Contact' element={<Contact/>}/>
       <Route path='user/:userid' element={<User/>}/>    /* this is how dynamic data is being fetched */
-      <Route path='/Github' element={<Github/>}/>
+      <Route loader={githubInfoLoader} path='/Github' element={<Github/>}/>   /* loader is defined here which is necessary 
       </Route>
   )
 )
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <RouterProvider router={router}/>    
+  <RouterProvider router={router}/>    /* this is how we are using the router works like a wrapper 
+                                        it only needs a router inside it that's it */
   </StrictMode>,
 )
